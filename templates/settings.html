@@ -7,7 +7,6 @@
   <form method="POST" action="{{ url_for('settings') }}">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
-```
 <label for="shop_name">Название магазина</label><br>
 <input id="shop_name" name="shop_name"
        value="{{ values.get('shop_name', 'Gucci Store') }}" required><br>
