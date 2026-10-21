@@ -50,7 +50,13 @@
         <a href="{{ url_for('products') }}">Товары</a>
         <a href="{{ url_for('orders') }}">Заказы</a>
         <a href="{{ url_for('settings') }}">Настройки</a>
-        <a href="{{ url_for('logout') }}">Выйти</a>
+        
+<form method="POST" action="{{ url_for('logout') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <button type="submit" style="color:white; background:#151515; border:1px solid #777;">
+        Выйти
+    </button>
+</form>
     </nav>
 </header>
 <main>
