@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Настройки магазина</h1>
+
+<div class="card">
+  <form method="post">
+    <label for="shop_name">Название магазина</label><br>
+    <input id="shop_name" name="shop_name" value="{{ values.get('shop_name', 'Gucci Store') }}" required><br>
+
+```
+<label for="currency">Валюта</label><br>
+<input id="currency" name="currency" value="{{ values.get('currency', 'RUB') }}"><br>
+
+<label for="delivery_text">Информация о доставке</label><br>
+<textarea id="delivery_text" name="delivery_text" rows="4">{{ values.get('delivery_text', '') }}</textarea><br>
+
+<label for="checkout_fields">Поля оформления заказа</label><br>
+<textarea id="checkout_fields" name="checkout_fields" rows="3">{{ values.get('checkout_fields', '') }}</textarea><br>
+
+<label for="manager_username">Имя менеджера</label><br>
+<input id="manager_username" name="manager_username" value="{{ values.get('manager_username', '') }}"><br>
+
+<button type="submit">Сохранить настройки</button>
+```
+
+  </form>
+</div>
+{% endblock %}
