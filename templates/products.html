@@ -1,0 +1,87 @@
+```html
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Управление товарами</h1>
+
+<div class="card">
+    <h2>Добавить товар</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+        <p>
+            <label>Название товара</label>
+            <input type="text" name="name" maxlength="160" required>
+        </p>
+
+        <p>
+            <label>Категория</label>
+            <input type="text" name="category" maxlength="40" required>
+        </p>
+
+        <p>
+            <label>Цена (руб.)</label>
+            <input type="number" name="price" min="0" step="0.01" required>
+        </p>
+
+        <p>
+            <label>Количество на складе</label>
+            <input type="number" name="stock" min="0" step="1" required>
+        </p>
+
+        <p>
+            <label>Описание</label>
+            <textarea name="description" rows="4"></textarea>
+        </p>
+
+        <p>
+            <label>Фотография товара</label>
+            <input type="file" name="image" accept="image/png,image/jpeg,image/webp">
+        </p>
+
+        <button type="submit">Добавить товар</button>
+    </form>
+</div>
+
+<div class="card">
+    <h2>Список товаров</h2>
+
+    {% if products %}
+    <div class="tablewrap">
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Фото</th>
+                <th>Название</th>
+                <th>Категория</th>
+                <th>Цена</th>
+                <th>Остаток</th>
+            </tr>
+
+            {% for p in products %}
+            <tr>
+                <td>{{ p.id }}</td>
+                <td>
+                    {% if p.image %}
+                    <img src="{{ url_for('static', filename='uploads/' ~ p.image) }}"
+                         alt="{{ p.name }}" width="60">
+                    {% else %}
+                    —
+                    {% endif %}
+                </td>
+                <td>{{ p.name }}</td>
+                <td>{{ p.category }}</td>
+                <td>{{ p.price / 100 }} ₽</td>
+                <td>{{ p.stock }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% else %}
+    <p class="muted">Товаров пока нет.</p>
+    {% endif %}
+</div>
+
+{% endblock %}
+```
